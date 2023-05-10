@@ -2,20 +2,34 @@ import * as THREE from 'three';
 const textureLoader = new THREE.TextureLoader();
 import vertexShader from "@/composables/shaders/vertex.glsl?raw";
 import fragmentShader from "@/composables/shaders/fragment.glsl?raw";
-
+import s_px from '@/assets/images/background/s_px.jpg'
+import s_nx from '@/assets/images/background/s_nx.jpg'
+import s_py from '@/assets/images/background/s_py.jpg'
+import s_ny from '@/assets/images/background/s_ny.jpg'
+import s_pz from '@/assets/images/background/s_pz.jpg'
+import s_nz from '@/assets/images/background/s_nz.jpg'
 
 
 const loader = new THREE.CubeTextureLoader()
-loader.setPath('/src/assets/images/background/')
+// loader.setPath('/src/assets/images/background/')
 
 export const textureCube = loader.load([
-  's_px.jpg',
-  's_nx.jpg',
-  's_py.jpg',
-  's_ny.jpg',
-  's_pz.jpg',
-  's_nz.jpg'
+  s_px,
+  s_nx,
+  s_py,
+  s_ny,
+  s_pz,
+  s_nz
 ])
+
+// export const textureCube = loader.load([
+//   's_px.jpg',
+//   's_nx.jpg',
+//   's_py.jpg',
+//   's_ny.jpg',
+//   's_pz.jpg',
+//   's_nz.jpg'
+// ])
 
 // export function createBackground(radius, widthSegm, heightSegm, mapName) {
 //     return new THREE.Mesh(
