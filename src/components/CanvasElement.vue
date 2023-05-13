@@ -1,11 +1,27 @@
 <template>
   <canvas ref="canvasElement" />
+  <ControlElement
+    @rotateCameraLeft="rotateCamera(-1, 0, 0)"
+    @rotateCameraRight="rotateCamera(1, 0, 0)"
+    @rotateCameraUp="rotateCamera(0, 1, 0)"
+    @rotateCameraDown="rotateCamera(0, -1, 0)"
+    @panCameraLeft="panCamera('ArrowLeft')"
+    @panCameraRight="panCamera('ArrowRight')"
+    @panCameraUp="panCamera('ArrowUp')"
+    @panCameraDown="panCamera('ArrowDown')"
+    @zoomIn="rotateCamera(0, 0, -1)"
+    @zoomOut="rotateCamera(0, 0, 1)"
+    @restoreDefault="orbitControl.reset()"
+  />
 </template>
 
 <script setup>
+import ControlElement from '@/components/ControlElement.vue'
+
 import { ref, computed, onMounted, watch, toRefs } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+// console.log(OrbitControls)
 // import { dat } from 'dat.gui'
 import { useWindowSize } from '@vueuse/core'
 
@@ -47,7 +63,6 @@ scene.background = textureCube
 // scene.add(grid)
 // const axesHelper = new THREE.AxesHelper(5)
 // scene.add(axesHelper)
-
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.01)
 scene.add(ambientLight)
@@ -138,6 +153,11 @@ function setRenderer() {
     orbitControl = new OrbitControls(camera, canvasElement.value)
     orbitControl.minDistance = 1
     orbitControl.maxDistance = 500
+    // orbitControl.screenSpacePanning = false;
+    // orbitControl.enableDamping = true
+    // orbitControl.dampingFactor = 0.05
+    orbitControl.listenToKeyEvents(window)
+
     orbitControl.update()
   }
   return { canvasElement }
@@ -147,95 +167,49 @@ onMounted(() => {
   setRenderer()
   addPlanets()
   animate()
-
 })
 
 const animate = () => {
-
   if (animationData.length > 0) {
     animationData.forEach((elem, index) => {
-      elem.mesh.rotation.y += 0.02 * elem.rotationCoef
-      elem.center.rotation.y += 0.02 * elem.rotationCoef
-      const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
-
-      if(rotation > planetStore.planetList[index].rotation + 1) {
-        // prevRotation = rotation
-        planetStore.planetList[index].rotation = rotation
-      }
-
-
-  // let timeoutId
-
-  //   timeoutId = setTimeout(() => {
-  //           console.log('settimeout')
-  //     planetStore.planetList[index].rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
-  //     clearTimeout(timeoutId)
-
-  //   }, 10000)
-  // setInterval(() => {
-  //     planetStore.planetList[index].rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
-    
-  // }, 2000);
-
-      // // planetStore.planetList[index].rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
+      // elem.mesh.rotation.y += 0.02 * elem.rotationCoef
+      // elem.center.rotation.y += 0.02 * elem.rotationCoef
       // const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
-      // debounce(updateRotation(index, rotation), 5000)
-      // // debouncedUpdateRotation(index, rotation)
-      // updatePlanetRotation(elem, index)
-
-      if (elem.moons.length > 0) {
-        elem.moons.forEach((moon) => {
-          moon.moonMesh.rotation.y += 0.02 * moon.rotationCoef
-          moon.moonCenter.rotation.y += 0.02 * moon.rotationCoef
-        })
-      }
+      // if(rotation > planetStore.planetList[index].rotation + 1) {
+      //   planetStore.planetList[index].rotation = rotation
+      // }
+      // if (elem.moons.length > 0) {
+      //   elem.moons.forEach((moon) => {
+      //     moon.moonMesh.rotation.y += 0.02 * moon.rotationCoef
+      //     moon.moonCenter.rotation.y += 0.02 * moon.rotationCoef
+      //   })
+      // }
     })
   }
 
-  sun.mesh.rotation.y += 0.02
+  // sun.mesh.rotation.y += 0.02
 
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
 }
-// const refreshStore = computed(() => {
-//   return 
-// })
-
 
 watch(aspectRatio, () => {
   updateCamera()
   updateRenderer()
 })
 
-// const debounce = (func) => {
-//   console.log('debounce')
-//   let timeoutId
-//   console.log(timeoutId)
-//   return (...args) => {
-//     if (timeoutId) {
-//       clearTimeout(timeoutId)
-//     }
-//     timeoutId = setTimeout(() => {
-//             console.log('settimeout')
-//       func(...args)
-//     }, 2000)
-//   }
-// }
+function rotateCamera(x, y, z) {
+  const panOffset = new THREE.Vector3(x, y, z)
+  panOffset.applyQuaternion(camera.quaternion)
+  camera.position.add(panOffset)
+  orbitControl.update()
+}
 
-// const updateRotation = (index, rotation) => {
-//   planetStore.planetList[index].rotation = rotation
-//   console.log('update')
-// }
-
-// const debouncedUpdateRotation = debounce(updateRotation)
-
-// const updatePlanetRotation = (elem, index) => {
-//   elem.center.rotation.y += 0.02 * elem.rotationCoef
-//   const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
-//   // console.log(rotation)
-//   debouncedUpdateRotation(index, rotation)
-// }
-
+function panCamera(key) {
+  const event = new KeyboardEvent('keydown', { key: key, code: key, bubbles: true })
+  document.dispatchEvent(event)
+  orbitControl.update()
+}
 </script>
 
 <style>

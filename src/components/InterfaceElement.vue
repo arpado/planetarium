@@ -64,7 +64,7 @@ const addElement = () => {
 <style scoped>
 .container {
   position: absolute;
-  top: 10px;
+  top: 110px;
   right: 10px;
   width: 200px;
   height: fit-content;
