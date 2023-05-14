@@ -6,16 +6,13 @@
   <a
     class="wrapper nav-btn"
     @click="$emit(button.func)"
-    data-augmented-ui="
-  tl-clip tr-clip br-clip bl-clip both"
-  >
+    data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+    >
     <!-- :style="{ right: `${btnArrayLength - index * 110 + 405}px` }" -->
     <!-- <p>{{ button.name }}</p> -->
     <Icon :icon="button.icon" />
   </a>
-
 </div>
-
 </template>
 
 <script>
@@ -31,7 +28,6 @@ export default {
     const mainStore = useMainStore()
     return { mainStore }
   },
-  // emits: [this.button.func]
 };
 </script>
 
