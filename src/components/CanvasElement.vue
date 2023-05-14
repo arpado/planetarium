@@ -172,22 +172,22 @@ onMounted(() => {
 const animate = () => {
   if (animationData.length > 0) {
     animationData.forEach((elem, index) => {
-      // elem.mesh.rotation.y += 0.02 * elem.rotationCoef
-      // elem.center.rotation.y += 0.02 * elem.rotationCoef
-      // const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
-      // if(rotation > planetStore.planetList[index].rotation + 1) {
-      //   planetStore.planetList[index].rotation = rotation
-      // }
-      // if (elem.moons.length > 0) {
-      //   elem.moons.forEach((moon) => {
-      //     moon.moonMesh.rotation.y += 0.02 * moon.rotationCoef
-      //     moon.moonCenter.rotation.y += 0.02 * moon.rotationCoef
-      //   })
-      // }
+      elem.mesh.rotation.y += 0.02 * elem.rotationCoef
+      elem.center.rotation.y += 0.02 * elem.rotationCoef
+      const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
+      if(rotation > planetStore.planetList[index].rotation + 1) {
+        planetStore.planetList[index].rotation = rotation
+      }
+      if (elem.moons.length > 0) {
+        elem.moons.forEach((moon) => {
+          moon.moonMesh.rotation.y += 0.02 * moon.rotationCoef
+          moon.moonCenter.rotation.y += 0.02 * moon.rotationCoef
+        })
+      }
     })
   }
 
-  // sun.mesh.rotation.y += 0.02
+  sun.mesh.rotation.y += 0.02
 
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
