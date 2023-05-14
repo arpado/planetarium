@@ -10,8 +10,9 @@
         :data-index="index"
         :btnArrayLength="buttons.length"
         :icon="button.icon"
-      />
-
+        @toggleCards="togglePlanetCards"
+        @toggleSearchBar="toggleSearchBar"
+      />   
     </transition-group>
     <div
       class="btn-toggle-menu nav-btn"
@@ -33,32 +34,37 @@
 import MenuItem from '@/components/MenuItem.vue'
 import gsap from 'gsap'
 
+import { useMainStore } from '@/stores/mainStore.js'
+
 export default {
   components: { MenuItem },
   data() {
     return {
       buttons: [
         {
-          name: 'Planets',
-          icon: 'solar:planet-4-bold-duotone',
-          href: '#hero'
+          name: 'Search',
+          id: 'search-btn',
+          icon: 'tabler:world-search',
+          func: 'toggleSearchBar'
         },
         {
-          name: 'Search',
-          icon: 'tabler:world-search',
-          href: '#projects'
+          name: 'Planets',
+          id: 'planet-cards-btn',
+          icon: 'solar:planet-4-bold-duotone',
+          func: 'toggleCards'
         },
         {
           name: 'Settings',
+          id: 'settings-btn',
           icon: 'ic:round-settings',
-          href: '#contacts'
+          func: ''
         },
         {
           name: 'Help',
+          id: 'help-btn',
           icon: 'solar:question-circle-broken',
-          href: '#contacts'
-        },
-
+          func: ''
+        }
       ],
       menuVisible: true
     }
@@ -69,7 +75,7 @@ export default {
       this.arrowRotated = !this.arrowRotated
     },
     enter(el) {
-      el.style.transform = `translateX(${this.buttons.length - el.dataset.index * 100 + 600 }px)`
+      el.style.transform = `translateX(${this.buttons.length - el.dataset.index * 100 + 600}px)`
     },
     afterEnter(el, done) {
       gsap.to(el, {
@@ -86,7 +92,17 @@ export default {
         delay: el.dataset.index * 0.5 + 0.5,
         onComplete: done
       })
+    },
+    togglePlanetCards() {
+      this.mainStore.showPlanetCards = !this.mainStore.showPlanetCards
+    },
+    toggleSearchBar() {
+        this.mainStore.showSearchBar = !this.mainStore.showSearchBar
     }
+  },
+  setup() {
+    const mainStore = useMainStore()
+    return { mainStore }
   }
 }
 </script>
@@ -101,6 +117,9 @@ export default {
   z-index: 995;
   font-size: 1.5rem;
   font-weight: 900;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 .btn-toggle-menu {
   height: 70px;
@@ -108,7 +127,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  /* position: absolute; */
   color: white;
   top: 0;
   right: 0;
