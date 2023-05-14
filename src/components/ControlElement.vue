@@ -106,7 +106,7 @@ let interval = null
 
 function press(cb, ...args) {
   cb(...args)
-  interval = setInterval(cb, 150, ...args)
+  interval = setInterval(cb, 100, ...args)
 }
 function release() {
   clearInterval(interval)
