@@ -1,6 +1,6 @@
 <template>
   <!-- data-augmented-ui="tl-clip tr-clip br-clip bl-clip both" -->
-  <div class="container">
+  <div class="container" v-if="mainStore.showPlanetCards">
     <!-- <div data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"> -->
     <div
       v-for="(planet, index) in planetStore.planetList"
@@ -51,9 +51,11 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { usePlanetStore } from '@/stores/planetStore.js'
+import { useMainStore } from '@/stores/mainStore.js'
 
 // access the `store` variable anywhere in the component ✨
 const planetStore = usePlanetStore()
+const mainStore = useMainStore()
 
 const elements = ref([])
 const addElement = () => {
@@ -67,7 +69,8 @@ const addElement = () => {
   top: 110px;
   right: 10px;
   width: 200px;
-  height: fit-content;
+  height: calc(100vh - 350px);
+  overflow-y: scroll;
   /* background: rgb(221, 217, 213); */
   /* padding: 1rem; */
 }
