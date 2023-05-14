@@ -53,8 +53,8 @@ const scene = new THREE.Scene()
 let renderer = null
 let orbitControl = null
 
-const camera = new THREE.PerspectiveCamera(75, aspectRatio.value, 0.1, 1000)
-camera.position.set(10, 10, 10)
+const camera = new THREE.PerspectiveCamera(75, aspectRatio.value, 0.1, 2000)
+camera.position.set(150, 150, 150)
 scene.add(camera)
 // scene.background = new THREE.Color(0x000000)
 scene.background = textureCube
@@ -68,7 +68,7 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 0.01)
 scene.add(ambientLight)
 
 // ADD SUN
-const sun = createSun(5, 30, 30, sunTexture)
+const sun = createSun(30, 30, 30, sunTexture)
 scene.add(sun.mesh)
 sun.pointLightArray.forEach((pointLight) => {
   scene.add(pointLight)
@@ -172,8 +172,8 @@ onMounted(() => {
 const animate = () => {
   if (animationData.length > 0) {
     animationData.forEach((elem, index) => {
-      elem.mesh.rotation.y += 0.02 * elem.rotationCoef
-      elem.center.rotation.y += 0.02 * elem.rotationCoef
+      elem.mesh.rotation.y += 0.01 * elem.rotationCoef
+      elem.center.rotation.y += 0.01 * elem.rotationCoef
       const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
       if(rotation > planetStore.planetList[index].rotation + 1) {
         planetStore.planetList[index].rotation = rotation
@@ -187,7 +187,7 @@ const animate = () => {
     })
   }
 
-  sun.mesh.rotation.y += 0.02
+  sun.mesh.rotation.y += 0.01
 
   renderer.render(scene, camera)
   requestAnimationFrame(animate)
