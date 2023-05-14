@@ -120,7 +120,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             ],
             rotationCoef: 0.53,
         },
-        /*{
+        {
             name: 'Jupiter',
             size: {
                 scale: 11.31,
@@ -204,7 +204,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
                 // },
             ],
             rotationCoef: 0.006,
-        },*/
+        },
     ])
 
     function addPlanet(radius, mapName) {
