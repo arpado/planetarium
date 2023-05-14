@@ -52,7 +52,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 0.4,
             },
-            radius: 15,
+            radius: 50,
             rotation: 0,
             mesh: planetMash.mercury,
             moons: [],
@@ -63,7 +63,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 0.94,
             },
-            radius: 20,
+            radius: 70,
             rotation: 0,
             mesh: planetMash.venus,
             moons: [],
@@ -74,7 +74,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 1,
             },
-            radius: 25,
+            radius: 100,
             rotation: 0,
             mesh: planetMash.earth,
             moons: [
@@ -95,7 +95,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 0.53,
             },
-            radius: 30,
+            radius: 130,
             rotation: 0,
             mesh: planetMash.mars,
             moons: [
@@ -125,7 +125,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 11.31,
             },
-            radius: 60,
+            radius: 180,
             rotation: 0,
             mesh: planetMash.jupiter,
             moons: [],
@@ -154,7 +154,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 4,
             },
-            radius: 90,
+            radius: 240,
             rotation: 0,
             mesh: planetMash.uranus,
             moons: [
@@ -182,7 +182,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             size: {
                 scale: 3.88,
             },
-            radius: 120,
+            radius: 300,
             rotation: 0,
             mesh: planetMash.neptune,
             moons: [
