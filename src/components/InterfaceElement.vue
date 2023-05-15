@@ -39,6 +39,8 @@
             :id="`planet-rotation-offset-${index}`"
             type="number"
             v-model="planet.rotation"
+            min="0"
+            max="360"
           />
         </div>
       </div>

@@ -46,31 +46,54 @@
         <span>Reset</span>
       </div>
     </div>
+    <div class="center-container">
+      <div class="speed-container">
+        <div
+          class="speed-slower"
+          data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+          @pointerdown="planetStore.rotationSpeed -= 1"
+          @pointerup="release"
+        >
+          -
+        </div>
+        <div class="speed-actual" data-augmented-ui="tl-clip tr-clip br-clip bl-clip both">
+          <input type="number" name="" id="" v-model="planetStore.rotationSpeed" inputmode="numeric"/>
+        </div>
+        <div
+          class="speed-faster"
+          data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+          @pointerdown="planetStore.rotationSpeed += 1"
+          @pointerup="release"
+        >
+          +
+        </div>
+      </div>
 
-    <div class="zoom-container">
-      <div
-        class="zoom-in"
-        data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
-        @pointerdown="press(emitAction, 'zoomIn')"
-        @pointerup="release"
-      >
-        ZI
-      </div>
-      <div
-        class="zoom-reset"
-        data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
-        @pointerdown="press(emitAction, 'restoreDefault')"
-        @pointerup="release"
-      >
-        reset
-      </div>
-      <div
-        class="zoom-out"
-        data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
-        @pointerdown="press(emitAction, 'zoomOut')"
-        @pointerup="release"
-      >
-        ZO
+      <div class="zoom-container">
+        <div
+          class="zoom-in"
+          data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+          @pointerdown="press(emitAction, 'zoomIn')"
+          @pointerup="release"
+        >
+          ZI
+        </div>
+        <div
+          class="zoom-reset"
+          data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+          @pointerdown="press(emitAction, 'restoreDefault')"
+          @pointerup="release"
+        >
+          reset
+        </div>
+        <div
+          class="zoom-out"
+          data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+          @pointerdown="press(emitAction, 'zoomOut')"
+          @pointerup="release"
+        >
+          ZO
+        </div>
       </div>
     </div>
 
@@ -117,13 +140,20 @@
       </div>
     </div>
   </div>
-  <div class="panel-toggler" data-augmented-ui="tl-clip tr-clip br-clip bl-clip both" @click="toggleNavigation">
-      toggle panel
+  <div
+    class="panel-toggler"
+    data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
+    @click="toggleNavigation"
+  >
+    toggle panel
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { usePlanetStore } from '@/stores/planetStore.js'
+const planetStore = usePlanetStore()
+
 const emit = defineEmits([
   'rotateCameraLeft',
   'rotateCameraRight',
@@ -151,7 +181,7 @@ function emitAction(action) {
 }
 let showNavigation = ref(true)
 function toggleNavigation() {
-    showNavigation.value = !showNavigation.value
+  showNavigation.value = !showNavigation.value
 }
 </script>
 
@@ -240,11 +270,20 @@ function toggleNavigation() {
   align-items: center;
   cursor: pointer;
 }
-.zoom-container {
+.zoom-container,
+.speed-container {
   display: flex;
   width: fit-content;
   height: fit-content;
 }
+.speed-actual > input {
+  width: 50px;
+  color: black;
+  text-align: center;
+}
+.speed-slower,
+.speed-actual,
+.speed-faster,
 .zoom-in,
 .zoom-out,
 .zoom-reset {

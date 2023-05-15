@@ -172,16 +172,16 @@ onMounted(() => {
 const animate = () => {
   if (animationData.length > 0) {
     animationData.forEach((elem, index) => {
-      elem.mesh.rotation.y += 0.01 * elem.rotationCoef
-      elem.center.rotation.y += 0.01 * elem.rotationCoef
+      elem.mesh.rotation.y += planetStore.rotationSpeed * elem.rotationCoef / 100
+      elem.center.rotation.y += planetStore.rotationSpeed * elem.rotationCoef / 100
       const rotation = THREE.MathUtils.radToDeg(elem.center.rotation.y)
       if(rotation > planetStore.planetList[index].rotation + 1) {
-        planetStore.planetList[index].rotation = rotation
+        planetStore.planetList[index].rotation = rotation % 360
       }
       if (elem.moons.length > 0) {
         elem.moons.forEach((moon) => {
-          moon.moonMesh.rotation.y += 0.02 * moon.rotationCoef
-          moon.moonCenter.rotation.y += 0.02 * moon.rotationCoef
+          moon.moonMesh.rotation.y += planetStore.rotationSpeed * moon.rotationCoef / 100
+          moon.moonCenter.rotation.y += planetStore.rotationSpeed * moon.rotationCoef / 100
         })
       }
     })

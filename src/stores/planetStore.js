@@ -13,6 +13,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
     //   }
 
     //   return { count, doubleCount, increment }
+    let rotationSpeed = ref(1)
 
     let planetListOld = ref([
         {
@@ -213,5 +214,5 @@ export const usePlanetStore = defineStore('planetStore', () => {
 
     }
 
-    return { planetList, addPlanet }
+    return { rotationSpeed, planetList, addPlanet }
 })
