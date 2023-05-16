@@ -1,10 +1,10 @@
 <template>
   <canvas ref="canvasElement" />
   <ControlElement
-    @rotateCameraLeft="rotateCamera(-0.5, 0, 0)"
-    @rotateCameraRight="rotateCamera(0.5, 0, 0)"
-    @rotateCameraUp="rotateCamera(0, 0.5, 0)"
-    @rotateCameraDown="rotateCamera(0, -0.5, 0)"
+    @rotateCameraLeft="rotateCamera(-1, 0, 0)"
+    @rotateCameraRight="rotateCamera(1, 0, 0)"
+    @rotateCameraUp="rotateCamera(0, 2, 0)"
+    @rotateCameraDown="rotateCamera(0, -2, 0)"
     @panCameraLeft="panCamera('ArrowLeft')"
     @panCameraRight="panCamera('ArrowRight')"
     @panCameraUp="panCamera('ArrowUp')"
