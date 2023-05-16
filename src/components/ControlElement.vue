@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-show="showNavigation">
+  <div class="container noselect" v-show="showNavigation">
     <div class="rotation-container">
       <div
         data-augmented-ui=" bl-clip br-clip both"
