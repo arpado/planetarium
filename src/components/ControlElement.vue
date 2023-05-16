@@ -171,7 +171,7 @@ let interval = null
 
 function press(cb, ...args) {
   cb(...args)
-  interval = setInterval(cb, 100, ...args)
+  interval = setInterval(cb, 50, ...args)
 }
 function release() {
   clearInterval(interval)

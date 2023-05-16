@@ -1,16 +1,16 @@
 <template>
   <canvas ref="canvasElement" />
   <ControlElement
-    @rotateCameraLeft="rotateCamera(-1, 0, 0)"
-    @rotateCameraRight="rotateCamera(1, 0, 0)"
+    @rotateCameraLeft="rotateCamera(-2, 0, 0)"
+    @rotateCameraRight="rotateCamera(2, 0, 0)"
     @rotateCameraUp="rotateCamera(0, 2, 0)"
     @rotateCameraDown="rotateCamera(0, -2, 0)"
     @panCameraLeft="panCamera('ArrowLeft')"
     @panCameraRight="panCamera('ArrowRight')"
     @panCameraUp="panCamera('ArrowUp')"
     @panCameraDown="panCamera('ArrowDown')"
-    @zoomIn="rotateCamera(0, 0, -0.5)"
-    @zoomOut="rotateCamera(0, 0, 0.5)"
+    @zoomIn="rotateCamera(0, 0, -2)"
+    @zoomOut="rotateCamera(0, 0, 2)"
     @restoreDefault="orbitControl.reset()"
   />
   <button @click="addFlags">add flags</button>
