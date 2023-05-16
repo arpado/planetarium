@@ -13,7 +13,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
     //   }
 
     //   return { count, doubleCount, increment }
-    let rotationSpeed = ref(1)
+    let rotationSpeed = ref(0)
 
     let planetListOld = ref([
         {
