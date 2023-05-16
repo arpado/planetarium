@@ -226,7 +226,7 @@ function removeFlags() {
   animationData.forEach(item => {
     let flag = item.mesh.children.filter(e => e.isCSS2DObject === true)
     item.mesh.remove(flag[0])
-    animate()
+    // animate()
   })
 }
 
