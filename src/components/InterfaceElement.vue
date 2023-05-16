@@ -1,8 +1,16 @@
 <template>
-  <!-- data-augmented-ui="tl-clip tr-clip br-clip bl-clip both" -->
   <div class="container" v-if="mainStore.showPlanetCards">
-    <!-- <div data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"> -->
-    <div
+    <Swiper
+    :direction="'vertical'"
+    :slides-per-view="3"
+    :pagination="{
+      clickable: true,
+    }"
+    class="swiper-container swiper"
+    :modules="modules"
+    :mousewheel="true"
+  >
+    <SwiperSlide
       v-for="(planet, index) in planetStore.planetList"
       :key="index"
       data-augmented-ui="tl-clip tr-clip br-clip bl-clip both"
@@ -44,9 +52,9 @@
           />
         </div>
       </div>
-    </div>
-    <!-- </div> -->
+    </SwiperSlide>
     <button @click="planetStore.addPlanet">new planet</button>
+  </Swiper>
   </div>
 </template>
 
@@ -54,6 +62,23 @@
 import { ref, reactive } from 'vue'
 import { usePlanetStore } from '@/stores/planetStore.js'
 import { useMainStore } from '@/stores/mainStore.js'
+
+  // core version + navigation, pagination modules:
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import { Mousewheel } from 'swiper';
+
+  // Navigation, Pagination
+  // import Swiper and modules styles
+  import 'swiper/css';
+  // import 'swiper/css/navigation';
+  // import 'swiper/css/pagination';
+
+  // init Swiper:
+  // const swiper = new Swiper('.swiper', {
+  //   // configure Swiper to use modules
+  //   modules: [Mousewheel],
+  // });
+  const modules = [Mousewheel]
 
 // access the `store` variable anywhere in the component ✨
 const planetStore = usePlanetStore()
@@ -72,7 +97,7 @@ const addElement = () => {
   right: 10px;
   width: 200px;
   height: calc(100vh - 350px);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   /* background: rgb(221, 217, 213); */
   /* padding: 1rem; */
 }
@@ -82,6 +107,9 @@ const addElement = () => {
   display: flex;
   flex-direction: column;
   color: white;
+  /* width: 100px;
+  height: 100px; */
+  height: fit-content;
 }
 input {
   color: black;
@@ -94,5 +122,9 @@ button {
 }
 .visible {
     height: fit-content;
+}
+.swiper-container {
+  height: 100%;
+  width: 100%;
 }
 </style>
