@@ -15,6 +15,14 @@ export const usePlanetStore = defineStore('planetStore', () => {
     //   return { count, doubleCount, increment }
     let rotationSpeed = ref(0)
 
+    // let itemOnMod = ref(null)
+    // function togglePlanetSettings(item) {
+    //     if (item === itemOnMod.value) {
+    //         itemOnMod.value = null
+    //     }
+    //     itemOnMod.value = item
+    // }
+
     let planetListOld = ref([
         {
             size: {
@@ -79,7 +87,8 @@ export const usePlanetStore = defineStore('planetStore', () => {
             rotation: 0,
             mesh: planetMash.earth,
             moons: [
-                {
+                {   
+                    name: 'Moon',
                     size: {
                         scale: 0.2,
                     },
@@ -101,6 +110,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
             mesh: planetMash.mars,
             moons: [
                 {
+                    name: 'Phobos',
                     size: {
                         scale: 0.1,
                     },
@@ -110,6 +120,7 @@ export const usePlanetStore = defineStore('planetStore', () => {
                     rotationCoef: 20,
                 },
                 {
+                    name: 'Deimos',
                     size: {
                         scale: 0.2,
                     },
@@ -214,5 +225,5 @@ export const usePlanetStore = defineStore('planetStore', () => {
 
     }
 
-    return { rotationSpeed, planetList, addPlanet }
+    return { rotationSpeed, itemOnMod, planetList, addPlanet, /*togglePlanetSettings*/ }
 })
