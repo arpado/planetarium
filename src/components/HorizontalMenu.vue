@@ -12,6 +12,8 @@
         :icon="button.icon"
         @toggleCards="togglePlanetCards"
         @toggleSearchBar="toggleSearchBar"
+        @toggleSettings="mainStore.toggleModal('settings')"
+        @toggleHelp="mainStore.toggleModal('help')"
       />   
     </transition-group>
     <div
@@ -57,13 +59,13 @@ export default {
           name: 'Settings',
           id: 'settings-btn',
           icon: 'ic:round-settings',
-          func: ''
+          func: 'toggleSettings'
         },
         {
           name: 'Help',
           id: 'help-btn',
           icon: 'solar:question-circle-broken',
-          func: ''
+          func: 'toggleHelp'
         }
       ],
       menuVisible: true
