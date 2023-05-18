@@ -225,5 +225,5 @@ export const usePlanetStore = defineStore('planetStore', () => {
 
     }
 
-    return { rotationSpeed, itemOnMod, planetList, addPlanet, /*togglePlanetSettings*/ }
+    return { rotationSpeed, /*itemOnMod,*/ planetList, addPlanet, /*togglePlanetSettings*/ }
 })
